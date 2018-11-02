@@ -1,4 +1,4 @@
-Feature: AIP exchanges cards from its hand according to its strategy
+Feature: Does AIP exchanges cards from its hand according to its strategy?
 
 Scenario: AIP is one card away from a royal flush, exchanges, and wins
 	Given AIP is one card away from a royal flush
@@ -50,13 +50,13 @@ Scenario: AIP is one card away from a flush, exchanges, and loses
 	
 Scenario: AIP is one card away from a straight, exchanges, and wins
 	Given AIP is one card away from a straight
-	And HTB has a three of a kind
+	And HTB has a two pair
 	When AIP exchanges for a straight
 	Then AIP wins with a straight
 	
 Scenario: AIP is one card away from a straight, exchanges, and loses
 	Given AIP is one card away from a straight
-	And HTB has a three of a kind
+	And HTB has a two pair
 	When AIP exchanges for nothing
 	Then AIP loses without a straight
 	

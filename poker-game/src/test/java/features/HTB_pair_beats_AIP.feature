@@ -1,4 +1,4 @@
-Feature: Does HTB with a pair beat AIP with any other hand?
+Feature: Does HTB with a pair beat AIP with any lower hand?
 	
 Scenario: HTB has a pair and AIP has a high card
 	Given HTB has a pair and AIP has a high card

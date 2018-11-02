@@ -1,4 +1,4 @@
-Feature: Does HTB with a flush beat AIP with any other hand?
+Feature: Does HTB with a flush beat AIP with any lower hand?
 	
 Scenario: HTB has a flush and AIP has a straight
 	Given HTB has a flush and AIP has a straight

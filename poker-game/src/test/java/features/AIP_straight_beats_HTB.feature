@@ -1,4 +1,4 @@
-Feature: Does AIP with a straight beat HTB with any other hand?
+Feature: Does AIP with a straight beat HTB with any lower hand?
 	
 Scenario: AIP has a straight and HTB has a three of a kind
 	Given AIP has a straight and HTB has a three of a kind

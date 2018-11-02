@@ -1,4 +1,4 @@
-Feature: Does HTB with a full house beat AIP with any other hand?
+Feature: Does HTB with a full house beat AIP with any lower hand?
 	
 Scenario: HTB has a full house and AIP has a flush
 	Given HTB has a full house and AIP has a flush

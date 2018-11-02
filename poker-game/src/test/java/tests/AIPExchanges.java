@@ -135,15 +135,15 @@ public class AIPExchanges {
 		this.HTB = new Player(straight);
 	}
 	
-	@And("^HTB has a three of a kind$")
+	@And("^HTB has a two pair$")
 	public void three_of_a_kind() {
-		ArrayList<Card> threeOfAKind = new ArrayList<Card>();
-		threeOfAKind.add(new Card("S4"));
-		threeOfAKind.add(new Card("D4"));
-		threeOfAKind.add(new Card("H4"));
-		threeOfAKind.add(new Card("C7"));
-		threeOfAKind.add(new Card("S8"));
-		this.HTB = new Player(threeOfAKind);
+		ArrayList<Card> twoPair = new ArrayList<Card>();
+		twoPair.add(new Card("S4"));
+		twoPair.add(new Card("D4"));
+		twoPair.add(new Card("H5"));
+		twoPair.add(new Card("C5"));
+		twoPair.add(new Card("S8"));
+		this.HTB = new Player(twoPair);
 	}
 	
 	@When("^AIP exchanges for a royal flush$")

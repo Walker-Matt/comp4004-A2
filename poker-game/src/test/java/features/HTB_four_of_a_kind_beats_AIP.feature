@@ -1,4 +1,4 @@
-Feature: Does HTB with a four of a kind beat AIP with any other hand?
+Feature: Does HTB with a four of a kind beat AIP with any lower hand?
 	
 Scenario: HTB has a four of a kind and AIP has a full house
 	Given HTB has a four of a kind and AIP has a full house

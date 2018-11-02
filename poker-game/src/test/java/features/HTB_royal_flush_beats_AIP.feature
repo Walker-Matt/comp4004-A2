@@ -1,4 +1,4 @@
-Feature: Does HTB with a royal flush beat AIP with any other hand?
+Feature: Does HTB with a royal flush beat AIP with any lower hand?
 	
 Scenario: HTB has a royal flush and AIP has a straight flush
 	Given HTB has a royal flush and AIP has a straight flush

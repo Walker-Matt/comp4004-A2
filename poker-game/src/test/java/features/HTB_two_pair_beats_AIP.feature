@@ -1,4 +1,4 @@
-Feature: Does HTB with a two pair beat AIP with any other hand?
+Feature: Does HTB with a two pair beat AIP with any lower hand?
 	
 Scenario: HTB has a two pair and AIP has a pair
 	Given HTB has a two pair and AIP has a pair

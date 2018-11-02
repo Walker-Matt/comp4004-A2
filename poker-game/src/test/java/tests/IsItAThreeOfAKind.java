@@ -10,82 +10,52 @@ import core.Player;
 
 public class IsItAThreeOfAKind {
 	private Player player;
-	private ArrayList<Card> hand;
-	private String type;
+	private ArrayList<String> types;
+	private ArrayList<ArrayList<Card>> permutations;
 	
-	@Given("^I have a three of a kind in order$")
-	public void have_three_of_a_kind_in_order() {
-		this.hand = new ArrayList<Card>();
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("D4"));
-		this.hand.add(new Card("H4"));
-		this.hand.add(new Card("C5"));
-		this.hand.add(new Card("S6"));
-		this.player = new Player(this.hand);
+	public ArrayList<ArrayList<Card>> generatePermutations(ArrayList<Card> original) {
+		if (original.size() == 0) {
+			ArrayList<ArrayList<Card>> result = new ArrayList<ArrayList<Card>>(); 
+			result.add(new ArrayList<Card>()); 
+			return result; 
+		}
+		Card firstElement = original.remove(0);
+		ArrayList<ArrayList<Card>> returnValue = new ArrayList<ArrayList<Card>>();
+		ArrayList<ArrayList<Card>> permutations = generatePermutations(original);
+		for (ArrayList<Card> smallerPermutated : permutations) {
+			for (int index=0; index <= smallerPermutated.size(); index++) {
+				ArrayList<Card> temp = new ArrayList<Card>(smallerPermutated);
+				temp.add(index, firstElement);
+				returnValue.add(temp);
+			}
+		}
+		return returnValue;
 	}
 	
-	@Given("^I have a three of a kind out of order \\(one\\)$")
-	public void have_three_of_a_kind_out_of_order_1() {
-		this.hand = new ArrayList<Card>();
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("D4"));
-		this.hand.add(new Card("H5"));
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("C6"));
-		this.player = new Player(this.hand);
-	}
-	
-	@Given("^I have a three of a kind out of order \\(two\\)$")
-	public void have_three_of_a_kind_out_of_order_2() {
-		this.hand = new ArrayList<Card>();
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("D5"));
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("H4"));
-		this.hand.add(new Card("C6"));
-		this.player = new Player(this.hand);
-	}
-	
-	@Given("^I have a three of a kind out of order \\(three\\)$")
-	public void have_three_of_a_kind_out_of_order_3() {
-		this.hand = new ArrayList<Card>();
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("S5"));
-		this.hand.add(new Card("D4"));
-		this.hand.add(new Card("H6"));
-		this.hand.add(new Card("C4"));
-		this.player = new Player(this.hand);
-	}
-	
-	@Given("^I have a three of a kind out of order \\(four\\)$")
-	public void have_three_of_a_kind_out_of_order_4() {
-		this.hand = new ArrayList<Card>();
-		this.hand.add(new Card("S5"));
-		this.hand.add(new Card("S4"));
-		this.hand.add(new Card("D4"));
-		this.hand.add(new Card("H6"));
-		this.hand.add(new Card("C4"));
-		this.player = new Player(this.hand);
-	}
-	
-	@Given("^I have a three of a kind in reverse order$")
-	public void have_three_of_a_kind_in_reverse_order() {
-		this.hand = new ArrayList<Card>();
-		this.hand.add(new Card("S6"));
-		this.hand.add(new Card("D5"));
-		this.hand.add(new Card("H4"));
-		this.hand.add(new Card("C4"));
-		this.hand.add(new Card("S4"));
-		this.player = new Player(this.hand);
+	@Given("^I have a three of a kind in any order$")
+	public void all_permutations_three_of_a_kind() {
+		ArrayList<Card> original = new ArrayList<Card>();
+		original.add(new Card("S2"));
+		original.add(new Card("D2"));
+		original.add(new Card("H2"));
+		original.add(new Card("C5"));
+		original.add(new Card("S6"));
+		permutations = generatePermutations(original);
 	}
 	
 	@When("^I check for a three of a kind$")
 	public void check_for_three_of_a_kind() {
-		this.type = player.getHighestHand().toString();
+		this.types = new ArrayList<String>();
+		for(ArrayList<Card> permutation : this.permutations) {
+			this.player = new Player(permutation);
+			this.types.add(this.player.getHighestHand().toString());
+		}
 	}
 	
 	@Then("^it should be a three of a kind$")
 	public void be_three_of_a_kind() {
-		assertEquals("THREE_OF_A_KIND", this.type);
+		for(String type : types) {
+			assertEquals("THREE_OF_A_KIND", type);
+		}
 	}
 }
